@@ -11,22 +11,35 @@ p = Predicates()
 
 rules = [
     Rule(
-        when=(
-            (p.person_equal_principal & p.principal_with_EIK)
-            | (p.pincipal_contains_any_of_thewords)
-        ),
+        when=(p.person_equal_principal & ~p.contains_any_of_the_solder_words),
+        value=PaymentType.VoluntaryPayment.value,
+    ),
+    Rule(
+        when=(p.pincipal_contains_any_of_the_pension_words),
+        value=PaymentType.PensionSolder.value,
+    ),
+    Rule(
+        when=(p.principal_with_EIK | p.pincipal_contains_any_of_thewords),
         value=PaymentType.SalarySolder.value,
     ),
     Rule(
         when=(
-            (p.contains_any_of_the_solder_words & p.person_equal_principal)
+            (
+                p.contains_any_of_the_solder_words
+                #  & p.person_equal_principal
+            )
             | (p.principal_equal_easypay & p.contains_any_of_the_easypay_solder_word)
         ),
         value=PaymentType.BankSolder.value,
     ),
+    # 443 фром 543
     Rule(
-        when=(p.person_not_equal_principal & p.reason_contains_part_or_full_person),
-        value=PaymentType.VoluntaryPayment.value,
+        when=(
+            p.person_not_equal_principal
+            & p.reason_contains_part_or_full_person
+            & ~p.contains_any_of_the_solder_words
+        ),
+        value=PaymentType.ThirdPartyVoluntaryPayment.value,
     ),
 ]
 

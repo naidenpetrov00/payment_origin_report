@@ -29,8 +29,8 @@ def read_documents() -> DataFrame:
                 {
                     PRINCIPAL_COL: df[PRINCIPAL_COL],
                     PRINCIPAL_VAT_COL: df[PRINCIPAL_VAT_COL],
-                    ARRIVED_SUM_COL: df[ARRIVED_SUM_COL],
-                    CASE_NUMBER_COL: df[CASE_NUMBER_COL],
+                    # ARRIVED_SUM_COL: df[ARRIVED_SUM_COL],
+                    # CASE_NUMBER_COL: df[CASE_NUMBER_COL],
                     PERSON_COL: df[PERSON_COL],
                     REASON_COL: df[REASON_COL],
                     TYPE_COL: df[TYPE_COL],

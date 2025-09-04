@@ -83,9 +83,8 @@ class ColNameFuzzMatch(Spec):
     col2: str
 
     def is_satisfied_by(self, row):
-        score = fuzz.token_sort_ratio(
-            row[self.col1].casefold(), row[self.col2].casefold()
-        )
+        person = row[self.col2].split(";")[0]
+        score = fuzz.token_sort_ratio(row[self.col1].casefold(), person.casefold())
         print(f"{row[self.col1]} - {row[self.col2]}")
         print(score)
         return score >= 60
@@ -168,7 +167,7 @@ class ColIdentifierIsEIK(Spec):
         val = row[self.col]
 
         # if pd.isna(val):
-            # return True
+        # return True
 
         s = str(val).strip()
         return len(s) == 9 or len(s) == 13

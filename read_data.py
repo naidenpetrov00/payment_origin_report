@@ -25,6 +25,7 @@ def read_documents() -> DataFrame:
         # for index, row in df.iterrows():
 
         frames.append(
+            # df
             pd.DataFrame(
                 {
                     PRINCIPAL_COL: df[PRINCIPAL_COL],

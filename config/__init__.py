@@ -1,5 +1,8 @@
-DOCUMENTS_FOLDER_PATH = "./documents"
-RESULTS_FOLDER_PATH = "./results"
+import os
+
+
+DOCUMENTS_FOLDER_PATH = os.path.abspath("./documents")
+RESULTS_FOLDER_PATH = os.path.abspath("./results")
 
 RECIEVED_AT = "Получени на"
 CASE_NUMBER_COL = "Дело"

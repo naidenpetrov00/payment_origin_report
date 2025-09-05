@@ -50,7 +50,8 @@ for index, row in df.iterrows():
 
 from datetime import datetime
 
-today_str = datetime.today().strftime("%Y-%m-%d,%H:%M:%S")
+os.makedirs(RESULTS_FOLDER_PATH, exist_ok=True)
+today_str = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
 output_filename = f"Analyse_{today_str}.xlsx"
 output_path = os.path.join(RESULTS_FOLDER_PATH, output_filename)
 

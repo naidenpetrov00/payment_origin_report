@@ -48,16 +48,22 @@ WORDS_FOR_EASYPAY_SOLDER = [
 
 WORDS_FOR_PRINCIPAL_SOLDER = [
     "АД",
+    "AD",
     "ЕАД",
     "EAD",
     "ООД",
+    "OOD",
     "ЕООД",
     "EOOD",
     "EOODCO",
     "ОБЩИНА",
     "ЕТ",
+    "ET",
     "КД",
+    "KD",
     "КДА",
+    "КДА",
+    "KDA",
     "БЮДЖЕТ",
     "ОП",
     "ПГ",
@@ -67,7 +73,7 @@ WORDS_FOR_PRINCIPAL_SOLDER = [
     "ТПК",
     "БД",
     "НМУ",
-    "УМБА",
+    "УМБАЛ",
 ]
 
 WORD_FOR_PENSION = [

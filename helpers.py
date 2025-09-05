@@ -17,20 +17,16 @@ def generate_categories(df: DataFrame, output_path):
 
 
 def generate_count_plot(column1, df, output_path):
-    # броим + проценти
     counts = df[column1].value_counts(dropna=False).reset_index()
     counts.columns = [column1, "Count"]
     counts["Percent"] = counts["Count"] / counts["Count"].sum() * 100
 
-    # за етикетите: NaN -> "NaN"
     y_labels = counts[column1].astype(str)
 
     plt.figure(figsize=(10, 6))
     ax = plt.gca()
-    # хоризонтални барове (y = категории, x = брой)
     bars = ax.barh(y_labels, counts["Count"])
 
-    # стойност + процент върху всеки бар (без цикъл по барове)
     total = counts["Count"].sum()
     labels = [f"{c} ({c/total:.1%})" for c in counts["Count"]]
     ax.bar_label(bars, labels=labels, label_type="edge")

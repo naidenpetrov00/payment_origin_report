@@ -31,7 +31,14 @@ def read_documents() -> DataFrame:
     for filename in os.listdir(DOCUMENTS_FOLDER_PATH):
         file_path = os.path.join(DOCUMENTS_FOLDER_PATH, filename)
         print(f"Processing file: {filename}")
-        df = pd.read_excel(file_path)
+        df = pd.read_excel(
+            file_path,
+            dtype={
+                PRINCIPAL_VAT_COL: str,
+                PERSON_VAT_COL: str,
+                CLAIMANT_VAT_COL: str,
+            },
+        )
 
         # cleaned_df = df.dropna(subset=[PRINCIPAL_COL, PERSON_COL])
         cleaned_df = pd.DataFrame(
@@ -45,9 +52,9 @@ def read_documents() -> DataFrame:
                 PERSON_COL: df[PERSON_COL],
                 PERSON_VAT_COL: df[PERSON_VAT_COL],
                 TYPE_PERSON_COL: None,
+                DEBTOR_COL: df[DEBTOR_COL],
                 CLAIMANT_COL: df[CLAIMANT_COL],
                 CLAIMANT_VAT_COL: df[CLAIMANT_VAT_COL],
-                DEBTOR_COL: df[DEBTOR_COL],
                 REASON_COL: df[REASON_COL],
                 REMAINING_SUM_COL: df[REMAINING_SUM_COL],
                 PDI_STATUS_COL: df[PDI_STATUS_COL],

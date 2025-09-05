@@ -66,6 +66,7 @@ WORDS_FOR_PRINCIPAL_SOLDER = [
     "ТПК",
     "БД",
     "НМУ",
+    "УМБА",
 ]
 
 WORD_FOR_PENSION = [

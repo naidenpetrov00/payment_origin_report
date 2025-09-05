@@ -4,6 +4,7 @@ from rapidfuzz import fuzz
 import pandas as pd
 from config import (
     PERSON_COL,
+    PERSON_VAT_COL,
     PRINCIPAL_COL,
     PRINCIPAL_VAT_COL,
     REASON_COL,
@@ -38,6 +39,7 @@ class Predicates:
         self.contains_any_of_the_easypay_solder_word = ColContainsAnyWord(
             REASON_COL, WORDS_FOR_EASYPAY_SOLDER
         )
+        self.reason_contains_person_vat = ColContainsColCaseSensitiveTrimmed(REASON_COL, PERSON_VAT_COL)
         self.principal_equal_easypay = ColEqualsValue(PRINCIPAL_COL, "Изипей АД")
 
 
@@ -52,6 +54,15 @@ class ColEq(Spec):
 
 @dataclass
 class ColNe(Spec):
+    col1: str
+    col2: str
+
+    def is_satisfied_by(self, row):
+        return str(row[self.col1]).casefold() != str(row[self.col2]).casefold()
+
+
+@dataclass
+class ColContainsVat(Spec):
     col1: str
     col2: str
 

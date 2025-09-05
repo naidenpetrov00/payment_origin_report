@@ -33,12 +33,12 @@ rules = [
         ),
         value=PaymentType.BankSolder.value,
     ),
-    # 443 фром 543
     Rule(
         when=(
-            p.person_not_equal_principal
+            (p.person_not_equal_principal & p.principal_with_EGN & p.person_with_EGN) |
+            (p.person_not_equal_principal
             & (p.reason_contains_part_or_full_person | p.reason_contains_person_vat)
-            & ~p.contains_any_of_the_solder_words
+            & ~p.contains_any_of_the_solder_words)
         ),
         value=PaymentType.ThirdPartyVoluntaryPayment.value,
     ),

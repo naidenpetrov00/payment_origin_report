@@ -49,6 +49,7 @@ WORDS_FOR_EASYPAY_SOLDER = [
 WORDS_FOR_PRINCIPAL_SOLDER = [
     "АД",
     "ЕАД",
+    "EAD",
     "ООД",
     "ЕООД",
     "EOOD",

@@ -22,6 +22,7 @@ class Predicates:
             ColContainsAnyWordCaseInsensitiveNotTrimmed(PRINCIPAL_COL, WORD_FOR_PENSION)
         )
         self.principal_with_EGN = ColIdentifierIsEGN(PRINCIPAL_COL)
+        self.person_with_EGN = ColIdentifierIsEGN(PERSON_COL)
         self.pincipal_contains_any_of_thewords = (
             ColContainsAnyWordSeparatedWithWhiteSpace(
                 PRINCIPAL_COL, WORDS_FOR_PRINCIPAL_SOLDER
@@ -39,7 +40,9 @@ class Predicates:
         self.contains_any_of_the_easypay_solder_word = ColContainsAnyWord(
             REASON_COL, WORDS_FOR_EASYPAY_SOLDER
         )
-        self.reason_contains_person_vat = ColContainsColCaseSensitiveTrimmed(REASON_COL, PERSON_VAT_COL)
+        self.reason_contains_person_vat = ColContainsColCaseSensitiveTrimmed(
+            REASON_COL, PERSON_VAT_COL
+        )
         self.principal_equal_easypay = ColEqualsValue(PRINCIPAL_COL, "Изипей АД")
 
 

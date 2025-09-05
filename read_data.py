@@ -84,6 +84,6 @@ def detect_person_type(vat):
         type = PersonType.Company.value
     elif len(vat) == 10:
         type = (
-            PersonType.FeMale.value if int(vat[-1]) % 2 == 0 else PersonType.Male.value
+            PersonType.FeMale.value if int(vat[8]) % 2 == 0 else PersonType.Male.value
         )
     return type

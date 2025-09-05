@@ -3,6 +3,8 @@ import os
 
 DOCUMENTS_FOLDER_PATH = os.path.abspath("./documents")
 RESULTS_FOLDER_PATH = os.path.abspath("./results")
+PLOTS_PATH = os.path.abspath("./plots")
+output_path = ""
 
 RECIEVED_AT = "Получени на"
 CASE_NUMBER_COL = "Дело"
@@ -11,6 +13,7 @@ SUM = "Сума"
 PRINCIPAL_COL = "Наредител"
 PRINCIPAL_VAT_COL = "Наредител ЕГН/ЕИК"
 PERSON_COL = "Лице"
+TYPE_PERSON_COL = "Вид Лице"
 PERSON_VAT_COL = "Лице ЕГН/ЕИК"
 CLAIMANT_COL = "Взискатели"
 CLAIMANT_VAT_COL = "Взискател ЕИК"

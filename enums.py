@@ -7,3 +7,9 @@ class PaymentType(Enum):
     PensionSolder = "Запор на пенсия"
     VoluntaryPayment = "Доброволно плащане"
     ThirdPartyVoluntaryPayment = "Доброволно плащане от трето лице"
+
+
+class PersonType(Enum):
+    Company = "Юридическо"
+    Male = "Мъж"
+    FeMale = "Жена"

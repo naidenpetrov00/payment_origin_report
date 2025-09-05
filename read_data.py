@@ -20,7 +20,9 @@ from config import (
     RESULT_COL,
     STATUS,
     SUM,
+    TYPE_PERSON_COL,
 )
+from enums import PersonType
 
 
 def read_documents() -> DataFrame:
@@ -42,6 +44,7 @@ def read_documents() -> DataFrame:
                 PRINCIPAL_VAT_COL: df[PRINCIPAL_VAT_COL],
                 PERSON_COL: df[PERSON_COL],
                 PERSON_VAT_COL: df[PERSON_VAT_COL],
+                TYPE_PERSON_COL: None,
                 CLAIMANT_COL: df[CLAIMANT_COL],
                 CLAIMANT_VAT_COL: df[CLAIMANT_VAT_COL],
                 DEBTOR_COL: df[DEBTOR_COL],
@@ -70,4 +73,17 @@ def clean_data(cleaned_df: DataFrame) -> DataFrame:
     )
     cleaned_df = cleaned_df[cleaned_df[PRINCIPAL_COL].astype(str).str.strip() != ""]
     cleaned_df = cleaned_df[cleaned_df[PERSON_COL].astype(str).str.strip() != ""]
+    cleaned_df[TYPE_PERSON_COL] = cleaned_df[PERSON_VAT_COL].apply(detect_person_type)
     return cleaned_df
+
+
+def detect_person_type(vat):
+    type = "No Data"
+    vat = str(vat)
+    if len(vat) == 9:
+        type = PersonType.Company.value
+    elif len(vat) == 10:
+        type = (
+            PersonType.FeMale.value if int(vat[-1]) % 2 == 0 else PersonType.Male.value
+        )
+    return type

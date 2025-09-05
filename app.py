@@ -1,10 +1,11 @@
 import os
-from config import RESULT_COL, RESULTS_FOLDER_PATH
+from config import RESULT_COL, RESULTS_FOLDER_PATH, output_path
 from enums import PaymentType
+from helpers import generate_categories
 from predicates import Predicates
 from read_data import read_documents
 from rules_engine import Rule, apply_rules
-
+from datetime import datetime
 
 df = read_documents()
 p = Predicates()
@@ -48,13 +49,13 @@ for index, row in df.iterrows():
     df.at[index, RESULT_COL] = result
 
 
-from datetime import datetime
-
 os.makedirs(RESULTS_FOLDER_PATH, exist_ok=True)
 today_str = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
 output_filename = f"Analyse_{today_str}.xlsx"
 output_path = os.path.join(RESULTS_FOLDER_PATH, output_filename)
 
 df.to_excel(output_path, index=False)
+
+generate_categories(df, output_path)
 
 print(f"Results written to {output_path}")

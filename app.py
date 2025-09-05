@@ -48,7 +48,12 @@ for index, row in df.iterrows():
     df.at[index, RESULT_COL] = result
 
 
-output_path = os.path.join(RESULTS_FOLDER_PATH, "classified_documents.xlsx")
+from datetime import datetime
+
+today_str = datetime.today().strftime("%Y-%m-%d,%H:%M:%S")
+output_filename = f"Analyse_{today_str}.xlsx"
+output_path = os.path.join(RESULTS_FOLDER_PATH, output_filename)
+
 df.to_excel(output_path, index=False)
 
 print(f"Results written to {output_path}")

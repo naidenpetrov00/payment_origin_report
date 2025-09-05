@@ -83,10 +83,9 @@ class ColNameFuzzMatch(Spec):
     col2: str
 
     def is_satisfied_by(self, row):
-        person = row[self.col2].split(";")[0]
-        score = fuzz.token_sort_ratio(row[self.col1].casefold(), person.casefold())
-        print(f"{row[self.col1]} - {row[self.col2]}")
-        print(score)
+        score = fuzz.token_sort_ratio(
+            row[self.col1].casefold(), row[self.col2].casefold()
+        )
         return score >= 60
 
 

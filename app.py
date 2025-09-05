@@ -35,7 +35,7 @@ rules = [
     ),
     Rule(
         when=(
-            (p.person_not_equal_principal & p.principal_with_EGN & p.person_with_EGN) |
+            (p.person_vat_not_principal_vat & p.principal_with_EGN & p.person_with_EGN) |
             (p.person_not_equal_principal
             & (p.reason_contains_part_or_full_person | p.reason_contains_person_vat)
             & ~p.contains_any_of_the_solder_words)

@@ -21,8 +21,8 @@ class Predicates:
         self.pincipal_contains_any_of_the_pension_words = (
             ColContainsAnyWordCaseInsensitiveNotTrimmed(PRINCIPAL_COL, WORD_FOR_PENSION)
         )
-        self.principal_with_EGN = ColIdentifierIsEGN(PRINCIPAL_COL)
-        self.person_with_EGN = ColIdentifierIsEGN(PERSON_COL)
+        self.principal_with_EGN = ColIdentifierIsEGN(PRINCIPAL_VAT_COL)
+        self.person_with_EGN = ColIdentifierIsEGN(PERSON_VAT_COL)
         self.pincipal_contains_any_of_thewords = (
             ColContainsAnyWordSeparatedWithWhiteSpace(
                 PRINCIPAL_COL, WORDS_FOR_PRINCIPAL_SOLDER
@@ -31,6 +31,7 @@ class Predicates:
         self.principal_with_EIK = ColIdentifierIsEIK(PRINCIPAL_VAT_COL)
         self.person_equal_principal = ColNameFuzzMatch(PERSON_COL, PRINCIPAL_COL)
         self.person_not_equal_principal = ColNe(PERSON_COL, PRINCIPAL_COL)
+        self.person_vat_not_principal_vat = ColNe(PERSON_VAT_COL, PRINCIPAL_VAT_COL)
         self.reason_contains_part_or_full_person = ColNamePartialMatch(
             REASON_COL, PERSON_COL
         )

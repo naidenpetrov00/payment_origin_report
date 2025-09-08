@@ -10,10 +10,12 @@ RECIEVED_AT = "Получени на"
 CASE_NUMBER_COL = "Дело"
 ARRIVED_SUM_COL = "Пристигнала сума"
 SUM = "Сума"
+SENDER_BIC = "Изпращач/Банка"
 PRINCIPAL_COL = "Наредител"
 PRINCIPAL_VAT_COL = "Наредител ЕГН/ЕИК"
 PERSON_COL = "Лице"
 TYPE_PERSON_COL = "Вид Лице"
+AGE_GROUP_COL = "Възрастова група"
 PERSON_VAT_COL = "Лице ЕГН/ЕИК"
 CLAIMANT_COL = "Взискатели"
 CLAIMANT_VAT_COL = "Взискател ЕИК"
@@ -36,6 +38,8 @@ WORDS_FOR_SOLDER = [
     "СПЕСТЕНА",
     "СЕКВ",
     "СПЕСТЕН",
+    "СПЕСТ",
+    "ОБЕЩ",
     "СПЕСТЯВАНИЯ",
     "ЧЛ.446",
     "МРЗ",
@@ -48,6 +52,7 @@ WORDS_FOR_EASYPAY_SOLDER = [
 
 WORDS_FOR_PRINCIPAL_SOLDER = [
     "АД",
+    "-АД",
     "AD",
     "ЕАД",
     "EAD",
@@ -57,6 +62,8 @@ WORDS_FOR_PRINCIPAL_SOLDER = [
     "EOOD",
     "EOODCO",
     "ОБЩИНА",
+    "УЧИЛИЩЕ",
+    "ГИМНАИЗИЯ",
     "ЕТ",
     "ET",
     "КД",
@@ -74,6 +81,7 @@ WORDS_FOR_PRINCIPAL_SOLDER = [
     "БД",
     "НМУ",
     "УМБАЛ",
+    "УСБАЛ",
 ]
 
 WORD_FOR_PENSION = [

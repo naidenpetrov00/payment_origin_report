@@ -1,8 +1,10 @@
 import os
 import pandas as pd
 from pandas import DataFrame
+from datetime import date
 
 from config import (
+    AGE_GROUP_COL,
     ARRIVED_SUM_COL,
     CASE_NUMBER_COL,
     CLAIMANT_COL,
@@ -22,7 +24,7 @@ from config import (
     SUM,
     TYPE_PERSON_COL,
 )
-from enums import PersonType
+from enums import AgeGroupType, PersonType
 
 
 def read_documents() -> DataFrame:
@@ -52,6 +54,7 @@ def read_documents() -> DataFrame:
                 PERSON_COL: df[PERSON_COL],
                 PERSON_VAT_COL: df[PERSON_VAT_COL],
                 TYPE_PERSON_COL: None,
+                AGE_GROUP_COL: None,
                 DEBTOR_COL: df[DEBTOR_COL],
                 CLAIMANT_COL: df[CLAIMANT_COL],
                 CLAIMANT_VAT_COL: df[CLAIMANT_VAT_COL],
@@ -81,7 +84,63 @@ def clean_data(cleaned_df: DataFrame) -> DataFrame:
     cleaned_df = cleaned_df[cleaned_df[PRINCIPAL_COL].astype(str).str.strip() != ""]
     cleaned_df = cleaned_df[cleaned_df[PERSON_COL].astype(str).str.strip() != ""]
     cleaned_df[TYPE_PERSON_COL] = cleaned_df[PERSON_VAT_COL].apply(detect_person_type)
+    cleaned_df[AGE_GROUP_COL] = cleaned_df[PERSON_VAT_COL].apply(
+        detect_person_age_group
+    )
     return cleaned_df
+
+
+def detect_person_age_group(vat):
+    if len(vat) != 10 or not vat.isdigit():
+        return AgeGroupType.NoType.value
+
+    age = get_age(vat)
+
+    if age < 0:
+        return AgeGroupType.NoType.value
+    elif age < 18:
+        return AgeGroupType.MINORS.value
+    elif age <= 25:
+        return AgeGroupType.YOUNG_ADULTS.value
+    elif age <= 35:
+        return AgeGroupType.EARLY_ADULTS.value
+    elif age <= 50:
+        return AgeGroupType.MIDDLE_AGED.value
+    elif age <= 65:
+        return AgeGroupType.PRE_RETIREMENT.value
+    else:
+        return AgeGroupType.RETIREES.value
+
+
+def get_age(vat):
+    year = int(vat[0:2])
+    month = int(vat[2:4])
+    day = int(vat[4:6])
+
+    if 1 <= month <= 12:
+        year += 1900
+    elif 21 <= month <= 32:
+        year += 1800
+        month -= 20
+    elif 41 <= month <= 52:
+        year += 2000
+        month -= 40
+    else:
+        return 0
+
+    try:
+        birth_date = date(year, month, day)
+    except ValueError:
+        return 0
+
+    today = date.today()
+    age = (
+        today.year
+        - birth_date.year
+        - ((today.month, today.day) < (birth_date.month, birth_date.day))
+    )
+
+    return age
 
 
 def detect_person_type(vat):

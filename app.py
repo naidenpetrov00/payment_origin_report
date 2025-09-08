@@ -20,25 +20,27 @@ rules = [
         value=PaymentType.PensionSolder.value,
     ),
     Rule(
-        when=(p.principal_with_EIK | p.pincipal_contains_any_of_thewords),
+        when=(
+            (p.principal_with_EIK | p.pincipal_contains_any_of_thewords)
+            & ~p.principal_equal_easypay
+        ),
         value=PaymentType.SalarySolder.value,
     ),
     Rule(
         when=(
-            (
-                p.contains_any_of_the_solder_words
-                #  & p.person_equal_principal
-            )
+            p.contains_any_of_the_solder_words
             | (p.principal_equal_easypay & p.contains_any_of_the_easypay_solder_word)
         ),
         value=PaymentType.BankSolder.value,
     ),
     Rule(
         when=(
-            (p.person_vat_not_principal_vat & p.principal_with_EGN & p.person_with_EGN) |
-            (p.person_not_equal_principal
-            & (p.reason_contains_part_or_full_person | p.reason_contains_person_vat)
-            & ~p.contains_any_of_the_solder_words)
+            (p.person_vat_not_principal_vat & p.principal_with_EGN & p.person_with_EGN)
+            | (
+                p.person_not_equal_principal
+                & (p.reason_contains_part_or_full_person | p.reason_contains_person_vat)
+                & ~p.contains_any_of_the_solder_words
+            )
         ),
         value=PaymentType.ThirdPartyVoluntaryPayment.value,
     ),
